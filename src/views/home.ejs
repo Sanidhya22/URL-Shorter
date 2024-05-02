@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Home</title>
     <style>
@@ -7,31 +8,49 @@
             width: 100%;
             border-collapse: collapse;
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid #dddddd;
             padding: 15px;
             text-align: left;
         }
+
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
-    <h2>URL Data</h2>
-    <table>
-        <tr>
-            <th>Short Id</th>
-            <th>Orignal URL</th>
-            <th>Click Count</th>
-        </tr>
-        <% data.forEach((item, index) => { %>
-            <tr>
-                <td><%= item.shortId %></td>
-                <td><%= item.redirectURL %></td>
-                <td><%= item.visitHistory.length %></td>
-            </tr>
-        <% }) %>
-    </table>
+    <h1>URL Shortner</h1>
+        <div>
+            <form method="POST" action="/api/url">
+                <label>Enter your Orignal URl :</label>
+                <input type="text" name="url" placeholder="https://example.com/" />
+                <button type="submit">Generate</button>
+            </form>
+            <h2>URL Data</h2>
+            <table>
+                <tr>
+                    <th>Short Id</th>
+                    <th>Orignal URL</th>
+                    <th>Click Count</th>
+                </tr>
+                <% data.forEach((item, index)=> { %>
+                    <tr>
+                        <td>
+                            <%= item.shortId %>
+                        </td>
+                        <td>
+                            <%= item.redirectURL %>
+                        </td>
+                        <td>
+                            <%= item.visitHistory.length %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </table>
+        </div>
 </body>
+
 </html>

@@ -17,7 +17,8 @@ export const handleGenerateNewShortURL = async (req, res, next) => {
       visitedHistory: [],
     });
     console.log(urlResponse);
-    return res.json({ id: shortID });
+
+    res.json({ URL: `${process.env.Domain}api/${shortID}` });
   } catch (error) {
     next(error);
   }
