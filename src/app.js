@@ -1,7 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import * as path from 'path';
 import urlRoutes from './routes/url.routes.js';
+import staticRoutes from './routes/static.routes.js';
 import { errorHandler } from './middlewares/errorHandler.middleware.js';
 import { handleDynamicShortId } from './controllers/shortId.controllers.js';
 
@@ -21,6 +23,11 @@ app.use(
 );
 //enable cookie-parser
 app.use(cookieParser());
+//enable ejs engine
+app.set('view engine', 'ejs');
+app.set('views', path.resolve('./src/views'));
+
+app.use(`${BASE_URL}/`, staticRoutes);
 
 app.use(`${BASE_URL}/url`, urlRoutes);
 

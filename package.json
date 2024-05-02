@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
+    "start": "set NODE_ENV=production & node -r dotenv/config --experimental-json-modules src/index.js",
+    "dev": "set NODE_ENV=development & nodemon -r dotenv/config --experimental-json-modules src/index.js"
+  
   },
   "author": "Saniddhya Nigam",
   "license": "ISC",
