@@ -22,3 +22,16 @@ export const handleGenerateNewShortURL = async (req, res, next) => {
     next(error);
   }
 };
+
+export const handleGetAnalytics = async (req, res, next) => {
+  try {
+    const shortId = req.params.shortId;
+    const result = await URL.findOne({ shortId });
+    res.json({
+      totalClicks: result.visitHistory.length,
+      analytics: result.visitHistory,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
