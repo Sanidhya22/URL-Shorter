@@ -16,9 +16,8 @@ export const handleGenerateNewShortURL = async (req, res, next) => {
       redirectURL: body.url,
       visitedHistory: [],
     });
-    console.log(urlResponse);
 
-    res.json({ URL: `${process.env.Domain}api/${shortID}` });
+    res.json({ URL: `${process.env.WEBSITE_HOSTNAME}/api/${shortID}` });
   } catch (error) {
     next(error);
   }

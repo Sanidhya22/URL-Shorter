@@ -4,14 +4,13 @@ import connectDB from './db/index.js';
 
 let server;
 
-if (process.env.NODE_ENV.trim() === 'production') {
-  dotenv.config({ path: './.env.production' });
-} else {
+if (process.env.NODE_ENV?.trim() === 'development') {
   dotenv.config({ path: './.env.local' });
+} else {
+  dotenv.config({ path: './.env' });
 }
 
-dotenv.config({ path: './env.development' });
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 4000;
 
 connectDB()
   .then(() => {
