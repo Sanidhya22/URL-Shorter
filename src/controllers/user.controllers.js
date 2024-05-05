@@ -4,17 +4,12 @@ import { ApiResponse } from '../utils/apiResponse.js';
 
 export const handleUserSignUp = async (req, res, next) => {
   try {
-    const { fullName, email, username, password } = req.body;
-    if (
-      [fullName, email, username, password].some(
-        (field) => field?.trim() === ''
-      )
-    ) {
+    const { email, username, password } = req.body;
+    if ([email, username, password].some((field) => field?.trim() === '')) {
       throw new ApiError(400, 'All fields are required');
     }
 
     const user = await User.create({
-      fullName,
       email,
       password,
       username,
@@ -54,7 +49,6 @@ export const handleUserSignIn = async (req, res, next) => {
     const { accessToken, refreshToken } = await generateAccessAndRefereshTokens(
       user._id
     );
-
     const loggedInUser = await User.findById(user._id).select(
       '-password -refreshToken'
     );
@@ -68,15 +62,7 @@ export const handleUserSignIn = async (req, res, next) => {
       .status(200)
       .cookie('accessToken', accessToken, options)
       .cookie('refreshToken', refreshToken, options)
-      .json({
-        status: 'success',
-        data: {
-          user: loggedInUser,
-          accessToken,
-          refreshToken,
-        },
-        message: 'User logged In Successfully',
-      });
+      .redirect('/');
   } catch (err) {
     next(err);
   }

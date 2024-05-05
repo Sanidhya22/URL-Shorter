@@ -8,6 +8,7 @@ import userRoutes from './routes/user.routes.js';
 import { errorHandler } from './middlewares/errorHandler.middleware.js';
 import { handleDynamicShortId } from './controllers/shortId.controllers.js';
 import { API } from './constants.js';
+import { verifyAuth } from './middlewares/auth.middleware.js';
 
 const app = express();
 
@@ -31,7 +32,7 @@ app.use(`/`, staticRoutes);
 
 app.use(`${API}/users`, userRoutes);
 
-app.use(`${API}/url`, urlRoutes);
+app.use(`${API}/url`, verifyAuth, urlRoutes);
 
 app.get(`${API}/:shortId`, handleDynamicShortId);
 

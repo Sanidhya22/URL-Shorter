@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SignIn Page</title>
+  </head>
+  <body>
+    <h1>Sign In</h1>
+    <Form action="/api/users/signin" method="POST">
+      <label>username</label>
+      <input type="text" required name="username" />
+      <label>Password</label>
+      <input type="password" required name="password" />
+
+      <button type="submit">Sign up</button>
+    </Form>
+  </body>
+</html>

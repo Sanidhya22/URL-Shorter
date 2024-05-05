@@ -8,13 +8,13 @@ export const handleGenerateNewShortURL = async (req, res, next) => {
     if (!body.url) {
       throw new ApiError(400, 'URl fields are required');
     }
-
     //Can any other libery to generate Short ID's
     const shortID = generateShortId();
     const urlResponse = await URL.create({
       shortId: shortID,
       redirectURL: body.url,
       visitedHistory: [],
+      createdBy: req.user._id,
     });
 
     res.json({ URL: `${process.env.WEBSITE_HOSTNAME}/api/${shortID}` });
